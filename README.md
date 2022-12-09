@@ -16,6 +16,8 @@ JORTSON takes that example JSON file, generates a form with it, and outputs the 
 This is different from similiar solutions, like [jsonforms.io](https://jsonforms.io/), where you have to manually define, for each form entry, what kind of input is needed.
 
 ## Usage
+Run `npm install`.  
+
 Put the example JSON in `const jsonSchema` variable in [index.js](index.js).
 
 Run `npm run build`. This will merge [index.css](index.css) and [index.js](index.js) files into [index.html](index.html), which will be called [JORTSON_form.html](dist/JORTSON_form.html), located in the [dist](dist) folder.
@@ -71,11 +73,7 @@ The input JSON should satisfy the following requirements:
 * array objects in the same array must have the same number of properties
 
 
-## Installation
-
-run `npm install` in a terminal in the same folder as index.html
-
-## Running
+## Development
 
 Run `npm run dev` to start the development server.  
 Open a browser and go to `http://localhost:5173` to see the generated form.  
@@ -83,9 +81,6 @@ Alternatively, use the live server plugin in VSCode.
 
 If using a Chromium based browser, press F12 in the browser and in the top-right corner of devtools click on Toggle Device Toolbar which will show the page as though it's a mobile device.
 The dimensions used for development were 360 x 640, which is the resolution of a Samsung Galaxy S5.
-
-## Creating a build
-
 
 
 ## Credits
