@@ -1,0 +1,403 @@
+
+
+/* #region Overrides */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, label, span, a, p, button, input, select {
+  color: #333;
+  height: 30px;
+  outline: none;
+  font-size: 16px;
+  line-height: 30px;
+  display: inline-block;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+button, input[type="button"] {
+  padding: 0 10px;
+  cursor: pointer;
+  background-color: #ddd;
+}
+
+button:active {
+  background-color: #bbb;
+}
+
+input, select, button, input[type="button"] {
+  border: 1px solid #999;
+}
+
+input, select {
+  padding: 0 5px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+p {
+  line-height: 20px;
+}
+
+hr {
+  margin-top: 10px;
+}
+
+/* #endregion */
+
+
+
+/* #region Common */
+
+.svg-button, .svg-button:active {
+  border: none;
+  background-color: transparent;
+}
+
+.svg-button > svg {
+  width: 22px;
+  height: 100%;
+  fill: #999;
+  pointer-events: none;
+}
+
+.svg-button:active > svg {
+  fill: #777;
+}
+
+.page-header {
+  height: 50px;
+  padding: 0 10px;
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid #999;
+}
+
+.page-header > h1, .page-header > button {
+  height: 50px;
+  line-height: 50px;
+  vertical-align: top;
+}
+
+.page-header > button {
+  top: 0;
+  position: absolute;
+}
+
+.form-control, .form-control-2 {
+  padding: 0 10px;
+  margin-top: 10px;
+  white-space: nowrap;
+}
+
+.form-control > *, .form-control-2 > * {
+  vertical-align: top;
+}
+
+.form-control > label, .form-control-2 > label {
+  width: 100px;
+}
+
+.form-control > input, .form-control > select {
+  width: calc(100% - 105px);
+}
+
+.form-control-2 > input {
+  width: calc(100% - 140px);
+}
+
+/* #endregion */
+
+
+
+/* #region Home Page */
+
+#home-page {
+  height: 100%;
+  display: none;
+  min-height: 100%;
+}
+
+#home-import-button {
+  right: 10px;
+}
+
+#home-import-button > svg {
+  transform: rotate(180deg);
+}
+
+#home-form-list {
+  overflow-y: auto;
+  position: relative;
+  border-bottom: 1px solid #999;
+  height: calc(100% - 30px - 30px - 50px);
+}
+
+#home-create-form-button {
+  margin: 10px;
+  height: 40px;
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 40px;
+  background-color: #ddd;
+  width: calc(100% - 20px);
+  border-top: 1px solid #999;
+}
+
+.home-list-item {
+  height: 55px;
+  display: flex;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  align-items: center;
+  border-bottom: 1px solid #999;
+}
+
+.home-list-item > label {
+  flex-grow: 1;
+  height: auto;
+  font-size: 16px;
+  max-height: 65px;
+  padding-left: 10px;
+  white-space: nowrap;
+}
+
+.home-list-item > button {
+  width: 45px;
+  height: 100%;
+  min-width: 45px;
+  vertical-align: top;
+}
+
+.home-list-item > button:active {
+  background-color: #ddd;
+}
+
+#home-debug-button, #debug-back-button {
+  left: 10px;
+  width: 70px;
+  height: 30px;
+  margin-top: 10px;
+  line-height: 30px;
+}
+
+/* #endregion */
+
+
+
+/* #region Form Page */
+
+#form-page {
+  display: none;
+  min-height: 100%;
+  padding-bottom: 30px;
+}
+
+#form-back-button {
+  left: 10px;
+}
+
+#form-back-button > svg {
+  width: 18px;
+  transform: scaleX(1.6);
+}
+
+#form-download-button {
+  right: 10px;
+}
+
+.form-heading {
+  display: block;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.form-list-heading > label {
+  font-weight: bold;
+  white-space: nowrap;
+  width: calc(100% - 50px);
+}
+
+#form-page-form {
+  min-height: calc(100% - 50px);
+}
+
+#form-page-form > .form-list > .form-list-content > .form-list-item:not(:first-of-type) {
+  margin-top: 10px;
+  border-top: 1px solid #333;
+}
+
+.form-list-item:last-of-type {
+  padding-bottom: 10px;
+}
+
+.form-list-item-heading > label {
+  font-weight: bold;
+  white-space: nowrap;
+  width: calc(100% - 95px);
+}
+
+.form-list-item-heading > div > * {
+  vertical-align: top;
+}
+
+.form-delete-item-button > svg {
+  width: 20px;
+}
+
+.form-file-upload-button, .form-file-open-button {
+  width: 30px;
+  padding: 0;
+}
+
+.form-file-open-button {
+  display: none;
+}
+
+.form-file-open-button > svg {
+  width: 25px;
+}
+
+.form-control-file > .form-file-upload-label {
+  padding-left: 5px;
+  width: calc(100% - 105px - 30px - 30px - 15px);
+}
+
+.form-list-content {
+  background-color: #ddd; /* these .form-list-content items are for progressively darker colors when nested  */
+}
+
+.form-list-content .form-list-content {
+  background-color: #ccc;
+}
+
+.form-list-content .form-list-content .form-list-content {
+  background-color: #bbb;
+}
+
+.form-list-content .form-list-content .form-list-content .form-list-content {
+  background-color: #aaa;
+}
+
+.form-list-item.folded > .form-list-item-content {
+  display: none;
+}
+
+.form-list-item:not(.folded) .form-toggle-item-button > svg:first-of-type {
+  display: none;
+}
+
+.form-list-item:not(.folded) .form-toggle-item-button > svg:last-of-type {
+  display: block;
+}
+
+.form-list-item.folded .form-toggle-item-button > svg:first-of-type {
+  display: block;
+}
+
+.form-list-item.folded .form-toggle-item-button > svg:last-of-type {
+  display: none;
+}
+
+#form-page-image-dialog {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: fixed;
+  pointer-events: all;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#form-page-image-dialog-close-button {
+  right: 0;
+  top: 10px;
+  position: absolute;
+}
+
+#form-page-image-dialog-image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  pointer-events: none;
+}
+
+#debug-form-data {
+  width: 100%;
+  padding: 10px;
+  display: block;
+  white-space: break-spaces;
+}
+
+/* #endregion */
+
+
+
+/* #region Debug Page */
+
+#debug-page {
+  display: none;
+}
+
+#debug-page > button {
+  margin: 20px;
+}
+
+/* #endregion */
+
+
+
+/* #region Modifiers */
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.p-0-10 {
+  padding: 0 10px;
+}
+
+.pt-10-10-0-10 {
+  padding: 10px 10px 0 10px;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.float-right {
+  float: right;
+}
+
+.center {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+/* #endregion */
+
