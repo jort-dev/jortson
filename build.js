@@ -13,4 +13,4 @@ const js = fs.readFileSync("index.js", "utf8");
 html = html.replace(`<link rel="stylesheet" href="index.css" />`, `<style>\n${css}\n</style>`);
 html = html.replace(`<script type="module" src="index.js"></script>`, `<script>\n${js}\n</script>`);
 
-fs.writeFileSync(path.join(__dirname, "dist", "jsonForms.html"), html);
+fs.writeFileSync(path.join(__dirname, "dist", "JORTSON_form.html"), html);

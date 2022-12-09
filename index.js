@@ -18,7 +18,7 @@ const app = {
 
   // this shows the debug button on the home page and
   // the json object below the form on the form page
-  debugMode: true,
+  debugMode: false,
 
   // show a confirm dialog when deleting things
   confirmDelete: true,
@@ -50,25 +50,26 @@ const app = {
     },
     nl: { // dutch
       // html strings
-      homePageHeading: "My Forms",
-      homePageCreateForm: "Create Form",
-      formPageHeading: "Edit Form",
+      homePageHeading: "Documenten",
+      homePageCreateForm: "Nieuw document",
+      formPageHeading: "Bewerk document",
 
       // javascript strings
-      createFormPrompt: "Enter a name",
-      invalidFormNameLength: "Invalid Filename.  Maximum of 50 characters allowed",
-      invalidFormNameChars: "Invalid Filename.  Only letters, numbers, spaces and underscrore are allowed",
-      deleteFormPrompt: "Delete this form?",
-      homePageNoForms: "No Forms",
-      formPageLoading: "Loading",
-      formNotFoundError: "Data for this form not found",
-      deleteFormItemPrompt: "Delete this item?",
-      selectFileButtonLabel: "Select a file",
+      createFormPrompt: "Voer document naam in",
+      invalidFormNameLength: "De naam van dit bestand is te lang. Maximaal 50 letters.",
+      invalidFormNameChars: "De bestandsnaam bevat illegale tekens. Alleen letters, nummers, spaties en underscores mogen.",
+      deleteFormPrompt: "Verwijder dit document?",
+      homePageNoForms: "Geen documenten",
+      formPageLoading: "Laden...",
+      formNotFoundError: "Geen data voor dit document gevonden",
+      deleteFormItemPrompt: "Verwijder dit item?",
+      selectFileButtonLabel: "< Kies afbeelding",
       updatingElementNameIndexesError: "Error updating element name indexes",
-      overwriteExistingForm: "A file with the name ${} already exists.  Would you like to overwrite it?",
-      importFileTypeError: "Only ${} files can be imported"
+      overwriteExistingForm: "Er bestaat al een bestand met de naam ${}. Wil je het overschrijven?",
+      importFileTypeError: "Alleen ${} bestanden kunnen geimporteerd worden"
     }
   },
+
 
   // this returns the json schema which is used to define a default form.  It can be changed
   // at any time because when creating a new form a copy of this schema is included with
@@ -87,45 +88,26 @@ const app = {
 
     // start schema
     const jsonSchema = {
-      "general": {
-        "street": "frederik tennislaan",
-        "number": "482 - 232",
-        "zip code": "4980EZ",
-        "image": "img/object.jpg"
+      "addressBook": {
+        "owner": "ExampleOwnerName",
+        "image": "exampleImage.jpg"
       },
-      "location": [
+      "people": [
         {
-          "number": 1,
-          "name": "bedroom left",
-          "image": "img/bedroom.jpg",
-          "air sample": {
-            "temperature": 44.3,
-            "humidity": 43.4,
-            "co2": 432,
-            "yeast_fungi": [
-              {
-                "species": "",
-                "number": 9
-              },
-            ],
-            "bacteria": [
-              {
-                "species": ["Bacteria 1", "Bacteria 2", "Bacteria 3"],
-                "number": 999
-              }
-            ]
-          },
-          "particles": {
-            "measurements": [
-              {
-                "kind": "2.5um",
-                "quantity": 400
-              },
-            ]
-          },
-          "hcoc": {
-            "measurement": 0.01
-          }
+          "name": "exampleName1",
+          "last_name": "exampleLastName1",
+          "age": 32,
+          "image": "exampleImage1.png",
+          "hobbies": [
+            {
+              "name": "hobby1",
+              "hoursPerWeek": 1
+            },
+            {
+              "name": "hobby2",
+              "hoursPerWeek": 2
+            }
+          ]
         },
       ]
     };
@@ -546,7 +528,7 @@ const app = {
       // text-input-template
       } else if (schemaValue === "%string%") {
         template = this.getTemplate("text-input-template");
-        template.querySelector("label").textContent = formKey;
+        template.querySelector("label").textContent = this.getFormFormattedHeading(formKey, false);
         const inputEl = template.querySelector("input");
         inputEl.name = currentPath;
         inputEl.value = formValue;
@@ -557,7 +539,7 @@ const app = {
       // number-input-template
       } else if (schemaValue === "%number%") {
         template = this.getTemplate("number-input-template");
-        template.querySelector("label").textContent = formKey;
+        template.querySelector("label").textContent = this.getFormFormattedHeading(formKey, false);
         const inputEl = template.querySelector("input");
         inputEl.name = currentPath;
         inputEl.value = (formValue !== null && formValue !== undefined) ? +formValue : "";
@@ -567,14 +549,14 @@ const app = {
         template = this.getTemplate("file-upload-template");
         const buttonEl = template.querySelector(".form-file-upload-button");
         buttonEl.name = currentPath;
-        buttonEl.previousElementSibling.textContent = formKey.replace("_file", "");
+        buttonEl.previousElementSibling.textContent = this.getFormFormattedHeading(formKey.replace("_file", ""), false);
         buttonEl.nextElementSibling.textContent = formValue || this.i18n.selectFileButtonLabel;
         buttonEl.nextElementSibling.nextElementSibling.style.display = formValue ? "inline-block" : "none";
 
       // dropdown-template
       } else if (isSchemaValuePrimitiveArray) {
         template = this.getTemplate("dropdown-template");
-        template.querySelector("label").textContent = formKey;
+        template.querySelector("label").textContent = this.getFormFormattedHeading(formKey, false);
         const select = template.querySelector("select");
         select.name = currentPath;
         const options = schemaValue.map(x => `<option value="${x}">${x}</option>`).join("\n");
@@ -596,8 +578,16 @@ const app = {
   },
 
 
-  getFormFormattedHeading: function (text) {
-    return (text.charAt(0).toUpperCase() + text.slice(1)).replace(/_/g, " ");
+  getFormFormattedHeading: function (text, upperCaseFirst=true) {
+    let result = text.replace(/([A-Z])/g, " $1");
+    result = result.replace("_", " ");
+    result = result.toLowerCase();
+    result = result.trim();
+    if(upperCaseFirst){
+      result = result.charAt(0).toUpperCase() + result.slice(1);
+    }
+    console.log("Converted " + text + " to " + result);
+    return result;
   },
 
 
@@ -984,7 +974,7 @@ const app = {
 
       // string type (might be a file type too if using a file keyword)
       } else if (typeof value === "string") {
-        if (key === "image" || key === "file" || key.endsWith("_file")) {
+        if (key.includes("image") || key.includes("file") || key.includes("afbeelding")) {
           jsonObj[key] = setTypes ? "%file%" : null;
         } else {
           jsonObj[key] = setTypes ? "%string%" : null;
